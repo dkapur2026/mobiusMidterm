@@ -1,53 +1,111 @@
-// Import Three.js from a CDN
-import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js';
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.128/build/three.module.js';
 
 const mobiusData = [
-  { letter: "A", word: "Apple", image: "/Users/dhruv.kapur/mobiusMidterm/images/apple.png", definition: "A fruit that grows on apple trees.", descriptor: "Sweet and crunchy." },
-  //{ letter: "B", word: "Ball", image: "images/ball.jpg", definition: "A round object used in games.", descriptor: "Bouncy and round." },
+  {
+    letter: "A",
+    word: "Apple",
+    image: "images/apple.jpg",
+    definition: "A fruit that grows on apple trees.",
+    descriptor: "Sweet and crunchy."
+  },
   // Add entries for each letter up to Z
 ];
 
 let currentIndex = 0;
 
-// Initialize Three.js scene
+// Initialize the scene
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById("mobius") });
-renderer.setSize(300, 300);
+const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
+camera.position.z = 5;
 
-const geometry = new THREE.TorusGeometry(1, 0.4, 16, 100);
-const material = new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load(mobiusData[0].image) });
-const mobius = new THREE.Mesh(geometry, material);
-scene.add(mobius);
-camera.position.z = 3;
+// Initialize the renderer
+const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('mobius'), antialias: true });
+renderer.setSize(600, 600);
 
-function animate() {
-  requestAnimationFrame(animate);
-  mobius.rotation.x += 0.01;
-  mobius.rotation.y += 0.01;
-  renderer.render(scene, camera);
+// Create Möbius strip geometry
+const mobiusGeometry = new THREE.ParametricGeometry(function(u, v, target) {
+  u *= Math.PI * 2;
+  v = v * 2 - 1;
+  const a = 1;
+
+  const x = (a + v * Math.cos(u / 2)) * Math.cos(u);
+  const y = (a + v * Math.cos(u / 2)) * Math.sin(u);
+  const z = v * Math.sin(u / 2);
+
+  target.set(x, y, z);
+}, 100, 20);
+
+// Create canvas texture
+const canvas = document.createElement('canvas');
+canvas.width = 1024;
+canvas.height = 512;
+const context = canvas.getContext('2d');
+
+const texture = new THREE.CanvasTexture(canvas);
+texture.wrapS = THREE.RepeatWrapping;
+texture.wrapT = THREE.RepeatWrapping;
+texture.repeat.set(2, 1);
+
+const mobiusMaterial = new THREE.MeshBasicMaterial({
+  map: texture,
+  side: THREE.DoubleSide
+});
+
+const mobiusMesh = new THREE.Mesh(mobiusGeometry, mobiusMaterial);
+scene.add(mobiusMesh);
+
+// Draw initial content
+function drawCanvasContent(imageSrc, definition, descriptor) {
+  context.clearRect(0, 0, canvas.width, canvas.height);
+
+  const image = new Image();
+  image.src = imageSrc;
+  image.onload = function() {
+    context.drawImage(image, 0, 0, canvas.width / 3, canvas.height);
+
+    context.font = '48px Arial';
+    context.fillStyle = 'black';
+    context.textAlign = 'left';
+
+    context.fillText(definition, canvas.width / 3 + 20, canvas.height / 2 - 50);
+    context.fillText(descriptor, canvas.width / 3 + 20, canvas.height / 2 + 50);
+
+    texture.needsUpdate = true;
+  };
 }
-animate();
 
-// Function to update display
 function updateDisplay() {
   const { letter, word, image, definition, descriptor } = mobiusData[currentIndex];
-  document.getElementById("title").textContent = `${letter} is for ${word}`;
-  document.getElementById("definition").textContent = `Definition: ${definition}`;
-  document.getElementById("descriptor").textContent = `Descriptor: ${descriptor}`;
-  material.map = new THREE.TextureLoader().load(image); // Update image texture
-  material.needsUpdate = true;
+  document.getElementById('title').textContent = `${letter} is for ${word}`;
+  drawCanvasContent(image, definition, descriptor);
 }
 
-// Add event listeners
-document.getElementById("next").addEventListener("click", () => {
+// Navigation event listeners
+document.getElementById('next').addEventListener('click', () => {
   currentIndex = (currentIndex + 1) % mobiusData.length;
   updateDisplay();
 });
 
-document.getElementById("prev").addEventListener("click", () => {
+document.getElementById('prev').addEventListener('click', () => {
   currentIndex = (currentIndex - 1 + mobiusData.length) % mobiusData.length;
   updateDisplay();
 });
 
+// Start with the first letter
 updateDisplay();
+
+// Animate the scene
+function animate() {
+  requestAnimationFrame(animate);
+
+  mobiusMesh.rotation.x += 0.005;
+  mobiusMesh.rotation.y += 0.005;
+
+  texture.offset.x -= 0.002;
+  if (texture.offset.x < -1) {
+    texture.offset.x = 0;
+  }
+
+  renderer.render(scene, camera);
+}
+animate();
