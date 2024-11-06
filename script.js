@@ -65,7 +65,7 @@ function drawCanvasContent(imageSrc, definition, descriptor) {
   image.onload = function() {
     context.drawImage(image, 0, 0, canvas.width / 3, canvas.height);
 
-    context.font = '16px Arial';
+    context.font = '12px Arial';
     context.fillStyle = 'white';
     context.textAlign = 'left';
 
@@ -105,15 +105,22 @@ updateDisplay();
 // Animate the scene
 function animate() {
   requestAnimationFrame(animate);
-
+  /*
   mobiusMesh.rotation.x += 0.005;
   mobiusMesh.rotation.y += 0.005;
 
   texture.offset.x -= 0.002;
   if (texture.offset.x < -1) {
     texture.offset.x = 0;
-  }
+  }*/
 
+    requestAnimationFrame(animate);
+
+  // Update texture offset to make the content move across the strip surface
+  texture.offset.x -= 0.005; // Adjust speed as needed
+  if (texture.offset.x < -1) {
+    texture.offset.x = 0; // Reset offset to create a seamless loop
+  }
   renderer.render(scene, camera);
 }
 animate();
