@@ -116,7 +116,7 @@ function animate() {
 
 
   // Update texture offset to make the content move across the strip surface
-  texture.offset.x -= 0.005; // Adjust speed as needed
+  texture.offset.x -= 0.0005; // Adjust speed as needed
   if (texture.offset.x < -1) {
     texture.offset.x = 0; // Reset offset to create a seamless loop
   }
