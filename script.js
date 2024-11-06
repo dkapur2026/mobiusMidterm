@@ -2,7 +2,7 @@
 import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js';
 
 const mobiusData = [
-  { letter: "A", word: "Apple", image: "images/apple.png", definition: "A fruit that grows on apple trees.", descriptor: "Sweet and crunchy." },
+  { letter: "A", word: "Apple", image: "/Users/dhruv.kapur/mobiusMidterm/images/apple.png", definition: "A fruit that grows on apple trees.", descriptor: "Sweet and crunchy." },
   //{ letter: "B", word: "Ball", image: "images/ball.jpg", definition: "A round object used in games.", descriptor: "Bouncy and round." },
   // Add entries for each letter up to Z
 ];
