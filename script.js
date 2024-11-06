@@ -20,7 +20,7 @@ camera.position.z = 5;
 
 // Initialize the renderer
 const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('mobius'), antialias: true });
-renderer.setSize(750, 750);
+renderer.setSize(600, 600);
 renderer.setClearColor(0xffffff, 1);
 // Create Möbius strip geometry
 const mobiusGeometry = new THREE.ParametricGeometry(function(u, v, target) {
