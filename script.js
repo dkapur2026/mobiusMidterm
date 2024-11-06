@@ -37,8 +37,8 @@ const mobiusGeometry = new THREE.ParametricGeometry(function(u, v, target) {
 
 // Create canvas texture
 const canvas = document.createElement('canvas');
-canvas.width = 512;
-canvas.height = 256;
+canvas.width = 1024;
+canvas.height = 512;
 const context = canvas.getContext('2d');
 
 const texture = new THREE.CanvasTexture(canvas);
@@ -48,17 +48,33 @@ texture.repeat.set(1, 1);
 
 const mobiusMaterial = new THREE.MeshBasicMaterial({
   map: texture,
-  side: THREE.DoubleSide
+  side: THREE.DoubleSide,
+  color: 0xaaaaaa,    // Light grey base color for contrast
+  roughness: 0.5,     // Adjust for soft reflections
+  metalness: 0.1 
 });
 
 const mobiusMesh = new THREE.Mesh(mobiusGeometry, mobiusMaterial);
-camera.position.set(0, 0, 10); // Adjust the z-axis as needed to zoom in/out
-mobiusMesh.rotation.set(Math.PI / -2, 0, Math.PI / 6); // Adjust rotation for best angle
+camera.position.set(0, 0, 6); // Adjust the z-axis as needed to zoom in/out
+mobiusMesh.rotation.set(Math.PI / -2, Math.pi/4, 0); // Adjust rotation for best angle
 scene.add(mobiusMesh);
 
-const light = new THREE.DirectionalLight(0xffffff, 1);
+/*const light = new THREE.DirectionalLight(0xffffff, 1);
 light.position.set(5, 5, 5).normalize();
-scene.add(light);
+scene.add(light);*/
+
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.3); // Low intensity for soft fill
+scene.add(ambientLight);
+
+// Create directional light for shadows and contrast
+const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+directionalLight.position.set(5, 5, 5).normalize();
+scene.add(directionalLight);
+
+// Add a point light for highlights and depth
+const pointLight = new THREE.PointLight(0xffffff, 0.5);
+pointLight.position.set(-5, -5, 5);  // Position to give depth
+scene.add(pointLight);
 
 // Draw initial content
 function drawCanvasContent(imageSrc, definition, descriptor) {
@@ -72,7 +88,7 @@ function drawCanvasContent(imageSrc, definition, descriptor) {
   image.onload = function() {
     context.drawImage(image, 0, 0, canvas.width / 3, canvas.height);
 
-    context.font = '12px Arial';
+    context.font = '14px Arial';
     context.fillStyle = 'white';
     context.textAlign = 'left';
 
