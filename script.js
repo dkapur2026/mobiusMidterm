@@ -52,9 +52,9 @@ const mobiusMaterial = new THREE.MeshBasicMaterial({
 });
 
 const mobiusMesh = new THREE.Mesh(mobiusGeometry, mobiusMaterial);
-mobiusMesh.rotation.x = Math.PI / 2;  // Rotate 90 degrees on the x-axis
+mobiusMesh.rotation.x = (Math.PI / -2);  // Rotate 90 degrees on the x-axis
 mobiusMesh.rotation.y = 0;            // Adjust y-axis rotation if needed
-mobiusMesh.rotation.z = 0; 
+mobiusMesh.rotation.z = (Math.PI/4); 
 scene.add(mobiusMesh);
 
 const light = new THREE.DirectionalLight(0xffffff, 1);
