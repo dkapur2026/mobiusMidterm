@@ -33,7 +33,7 @@ const mobiusGeometry = new THREE.ParametricGeometry(function(u, v, target) {
   const z = v * Math.sin(u / 2);
 
   target.set(x, y, z);
-}, 100, 20);
+}, 1000, 200);
 
 // Create canvas texture
 const canvas = document.createElement('canvas');
@@ -52,9 +52,8 @@ const mobiusMaterial = new THREE.MeshBasicMaterial({
 });
 
 const mobiusMesh = new THREE.Mesh(mobiusGeometry, mobiusMaterial);
-mobiusMesh.rotation.x = (Math.PI / -2);  // Rotate 90 degrees on the x-axis
-mobiusMesh.rotation.y = 0;            // Adjust y-axis rotation if needed
-mobiusMesh.rotation.z = (Math.PI/4); 
+camera.position.set(0, 0, 3); // Adjust the z-axis as needed to zoom in/out
+mobiusMesh.rotation.set(Math.PI / 2, 0, Math.PI / 6); // Adjust rotation for best angle
 scene.add(mobiusMesh);
 
 const light = new THREE.DirectionalLight(0xffffff, 1);
@@ -64,6 +63,15 @@ scene.add(light);
 // Draw initial content
 function drawCanvasContent(imageSrc, definition, descriptor) {
   context.clearRect(0, 0, canvas.width, canvas.height);
+
+
+  const gradient = context.createLinearGradient(0, 0, canvas.width, canvas.height);
+  gradient.addColorStop(0, "#0000FF");
+  gradient.addColorStop(0.5, "#00FF00");
+  gradient.addColorStop(1, "#FF00FF");
+  context.fillStyle = gradient;
+  context.fillRect(0, 0, canvas.width, canvas.height);
+  
   console.log(imageSrc);
   const image = new Image();
   image.src = imageSrc;
