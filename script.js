@@ -37,8 +37,8 @@ const mobiusGeometry = new THREE.ParametricGeometry(function(u, v, target) {
 
 // Create canvas texture
 const canvas = document.createElement('canvas');
-canvas.width = 1024;
-canvas.height = 512;
+canvas.width = 512;
+canvas.height = 256;
 const context = canvas.getContext('2d');
 
 const texture = new THREE.CanvasTexture(canvas);
@@ -66,7 +66,7 @@ function drawCanvasContent(imageSrc, definition, descriptor) {
     context.drawImage(image, 0, 0, canvas.width / 3, canvas.height);
 
     context.font = '48px Arial';
-    context.fillStyle = 'black';
+    context.fillStyle = 'white';
     context.textAlign = 'left';
 
     context.fillText(definition, canvas.width / 3 + 20, canvas.height / 2 - 50);
