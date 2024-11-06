@@ -47,7 +47,7 @@ texture.wrapT = THREE.RepeatWrapping;
 texture.repeat.set(1, 1);
 
 const mobiusMaterial = new THREE.MeshStandardMaterial({
-  map: texture,
+  //map: texture,
   side: THREE.DoubleSide,
   color: 0xaaaaaa,    // Light grey base color for contrast
   roughness: 0.5,     // Adjust for soft reflections
@@ -63,11 +63,11 @@ scene.add(mobiusMesh);
 light.position.set(5, 5, 5).normalize();
 scene.add(light);*/
 
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.3); // Low intensity for soft fill
+const ambientLight = new THREE.AmbientLight(0xffffff, 1); // Low intensity for soft fill
 scene.add(ambientLight);
 
 // Create directional light for shadows and contrast
-const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
 directionalLight.position.set(5, 5, 5).normalize();
 scene.add(directionalLight);
 
