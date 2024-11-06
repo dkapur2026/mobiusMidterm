@@ -20,7 +20,7 @@ camera.position.z = 5;
 
 // Initialize the renderer
 const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('mobius'), antialias: true });
-renderer.setSize(600, 600);
+renderer.setSize(750, 750);
 renderer.setClearColor(0xffffff, 1);
 // Create Möbius strip geometry
 const mobiusGeometry = new THREE.ParametricGeometry(function(u, v, target) {
@@ -57,9 +57,11 @@ scene.add(mobiusMesh);
 // Draw initial content
 function drawCanvasContent(imageSrc, definition, descriptor) {
   context.clearRect(0, 0, canvas.width, canvas.height);
-
+  console.log(imageSrc);
   const image = new Image();
   image.src = imageSrc;
+
+  
   image.onload = function() {
     context.drawImage(image, 0, 0, canvas.width / 3, canvas.height);
 
@@ -70,7 +72,13 @@ function drawCanvasContent(imageSrc, definition, descriptor) {
     context.fillText(definition, canvas.width / 3 + 20, canvas.height / 2 - 50);
     context.fillText(descriptor, canvas.width / 3 + 20, canvas.height / 2 + 50);
 
-    texture.needsUpdate = true;
+    //texture.needsUpdate = true;
+    setTimeout(() => {
+        texture.needsUpdate = true;
+      }, 50);
+  };
+  image.onerror = function() {
+    console.error("Failed to load image:", imageSrc);
   };
 }
 
