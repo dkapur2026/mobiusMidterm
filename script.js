@@ -47,7 +47,7 @@ texture.wrapT = THREE.RepeatWrapping;
 texture.repeat.set(1, 1);
 
 const mobiusMaterial = new THREE.MeshStandardMaterial({
-  //map: texture,
+  map: texture,
   side: THREE.DoubleSide,
   color: 0xaaaaaa,    // Light grey base color for contrast
   roughness: 0.5,     // Adjust for soft reflections
