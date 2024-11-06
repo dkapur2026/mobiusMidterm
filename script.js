@@ -65,12 +65,12 @@ function drawCanvasContent(imageSrc, definition, descriptor) {
   image.onload = function() {
     context.drawImage(image, 0, 0, canvas.width / 3, canvas.height);
 
-    context.font = '48px Arial';
+    context.font = '16px Arial';
     context.fillStyle = 'white';
     context.textAlign = 'left';
 
-    context.fillText(definition, canvas.width / 3 + 20, canvas.height / 2 - 50);
-    context.fillText(descriptor, canvas.width / 3 + 20, canvas.height / 2 + 50);
+    context.fillText(definition, canvas.width * 0.6, canvas.height * 0.4,);
+    context.fillText(descriptor, canvas.width * 0.6, canvas.height * 0.6);
 
     //texture.needsUpdate = true;
     setTimeout(() => {
