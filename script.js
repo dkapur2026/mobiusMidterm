@@ -44,7 +44,7 @@ const context = canvas.getContext('2d');
 const texture = new THREE.CanvasTexture(canvas);
 texture.wrapS = THREE.RepeatWrapping;
 texture.wrapT = THREE.RepeatWrapping;
-texture.repeat.set(2, 1);
+texture.repeat.set(1, 1);
 
 const mobiusMaterial = new THREE.MeshBasicMaterial({
   map: texture,
@@ -52,7 +52,14 @@ const mobiusMaterial = new THREE.MeshBasicMaterial({
 });
 
 const mobiusMesh = new THREE.Mesh(mobiusGeometry, mobiusMaterial);
+mobiusMesh.rotation.x = Math.PI / 2;  // Rotate 90 degrees on the x-axis
+mobiusMesh.rotation.y = 0;            // Adjust y-axis rotation if needed
+mobiusMesh.rotation.z = 0; 
 scene.add(mobiusMesh);
+
+const light = new THREE.DirectionalLight(0xffffff, 1);
+light.position.set(5, 5, 5).normalize();
+scene.add(light);
 
 // Draw initial content
 function drawCanvasContent(imageSrc, definition, descriptor) {
