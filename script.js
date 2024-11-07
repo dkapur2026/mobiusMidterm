@@ -52,7 +52,7 @@ const mobiusData = [
     },
     {
       letter: "H",
-      word: "Hopital",
+      word: "Hostipal",
       image: "images/hospital.png",
       definition: "An institution providing medical and surgical treatment and nursing care for sick or injured people.",
       descriptor: "Hospitals offer a range of healthcare services, including emergency care and specialized treatments."
@@ -178,7 +178,7 @@ const mobiusData = [
     },
     {
       letter: "Z",
-      word: "Zebra",
+      word: "Zeeba",
       image: "images/zebra.png",
       definition: "A wild horse with black-and-white stripes, native to Africa.",
       descriptor: "Zebras live in herds and are known for their unique striping patterns."
