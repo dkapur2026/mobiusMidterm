@@ -1,5 +1,5 @@
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.128/build/three.module.js';
-
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.module.js';
+// import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/jsm/controls/OrbitControls.js';
 const mobiusData = [
     {
       letter: "A",
@@ -199,6 +199,13 @@ renderer.setClearColor(0xffffff, 1);
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
+// const controls = new OrbitControls(camera, renderer.domElement);
+// controls.enableDamping = true; // Smooth control movement
+// controls.dampingFactor = 0.1;
+// controls.enableZoom = true;
+// controls.minDistance = 2;
+// controls.maxDistance = 10;
+
 // Create Möbius strip geometry
 const mobiusGeometry = new THREE.ParametricGeometry(function(u, v, target) {
   u *= Math.PI * 2;
@@ -381,9 +388,9 @@ function animate() {
     texture.offset.x = 0;
   }*/
 
-
+//   controls.update();
   // Update texture offset to make the content move across the strip surface
-  texture.offset.x -= 0.0005; // Adjust speed as needed
+  texture.offset.x -= 0.001 // Adjust speed as needed
   if (texture.offset.x < -1) {
     texture.offset.x = 0; // Reset offset to create a seamless loop
   }
