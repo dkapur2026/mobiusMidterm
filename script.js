@@ -45,7 +45,7 @@ const mobiusData = [
     },
     {
       letter: "G",
-      word: "Harambe",
+      word: "Grilla",
       image: "images/gorilla.png",
       definition: "A large, powerful, herbivorous primate of tropical African forests (genus Gorilla).",
       descriptor: "Characterized by its robust build and social behavior; known for intelligence and gentle nature."
@@ -115,7 +115,7 @@ const mobiusData = [
     },
     {
       letter: "Q",
-      word: "Quail",
+      word: "Kale",
       image: "images/quail.png",
       definition: "A small ground-dwelling bird of the pheasant family, often kept for its meat or eggs.",
       descriptor: "Known for its short tail and distinctive call, quails are common in both wild and domestic settings."
@@ -129,7 +129,7 @@ const mobiusData = [
     },
     {
       letter: "S",
-      word: "Sunflower",
+      word: "Sunfower",
       image: "images/sunflower.png",
       definition: "A tall plant of the daisy family, with a large yellow flower head (Helianthus annuus).",
       descriptor: "Sunflowers are grown for their seeds and oil, and are known to turn towards the sun."
@@ -143,7 +143,7 @@ const mobiusData = [
     },
     {
       letter: "U",
-      word: "Umbrella",
+      word: "Umbella",
       image: "images/umbrella.png",
       definition: "A device consisting of a circular canopy of cloth on a folding metal frame, used as protection against rain or sun.",
       descriptor: "Umbrellas are portable, often colorful, and essential in wet or sunny weather."
